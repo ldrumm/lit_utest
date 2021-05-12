@@ -15,7 +15,7 @@ def read(filename):
 
 setup(
     name="lit_utest",
-    version="0.1.0",
+    version="0.1.1",
     url="https://github.com/ldrumm/lit_utest",
     license='MIT',
 

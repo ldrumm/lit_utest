@@ -67,11 +67,14 @@ class UTestRunner(lit.formats.ShTest):
     def execute(self, test, cfg):
         parsers, results = zip(self.parsers())
         # `results` is set by reference by `parseIntegratedTestScript`
-        lit.TestRunner.parseIntegratedTestScript(
+        script = lit.TestRunner.parseIntegratedTestScript(
             test,
             additional_parsers=parsers,
             require_script=False
         )
+        if isinstance(script, lit.Test.Result):
+            # unsupported
+            return script
         tmp_dir, tmp_base = lit.TestRunner.getTempPaths(test)
         execdir = os.path.dirname(test.getExecPath())
         substs = lit.TestRunner.getDefaultSubstitutions(
